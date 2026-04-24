@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aeterna Studios — Production Tiers</title>
+<meta name="description" content="Tres niveles de producción cinematográfica. Elige el que encaja con tu marca.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg-dark: #0a0807;
+    --bg-light: #f4f1ec;
+    --ink: #1a1a1a;
+    --ink-soft: #3a3a3a;
+    --ink-dim: #8a8580;
+    --ink-faint: #b8b3ac;
+    --line-light: #d4cfc6;
+    --line-dark: rgba(201, 168, 76, 0.2);
+    --gold: #c9a84c;
+    --gold-light: #e8c989;
+    --gold-deep: #8a7340;
+    --cream: #f4f1ec;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg-light);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* HERO COMPACTO */
+  .hero {
+    background: var(--bg-dark);
+    color: var(--cream);
+    min-height: 40vh;
+    padding: 32px 28px 40px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(201,168,76,0.06) 0%, transparent 55%),
+                linear-gradient(180deg, #0a0807 0%, #12100c 100%);
+    z-index: 0;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.79 0 0 0 0 0.66 0 0 0 0 0.3 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: overlay;
+  }
+  .particles { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .particle {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: 0;
+    animation: float-particle 14s linear infinite;
+  }
+  @keyframes float-particle {
+    0% { opacity: 0; transform: translateY(100%) translateX(0); }
+    10% { opacity: 0.5; }
+    90% { opacity: 0.5; }
+    100% { opacity: 0; transform: translateY(-20%) translateX(30px); }
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line-dark);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: rise 1.2s cubic-bezier(0.2,0.8,0.2,1) 0.1s forwards;
+  }
+  .masthead-left {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(232,201,137,0.65);
+  }
+  .masthead-right {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: rgba(232,201,137,0.5);
+  }
+  .hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px 0 28px;
+  }
+  .hero-label {
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: rise 1s cubic-bezier(0.2,0.8,0.2,1) 0.3s forwards;
+  }
+  .hero-title {
+    font-family: 'Didact Gothic', sans-serif;
+    font-size: clamp(36px, 6vw, 68px);
+    letter-spacing: 0.04em;
+    line-height: 0.98;
+    color: var(--cream);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: rise 1.3s cubic-bezier(0.2,0.8,0.2,1) 0.5s forwards;
+  }
+  .hero-title em {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    background: linear-gradient(135deg, #e8c989 0%, #c9a84c 50%, #8a7340 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(14px, 1.6vw, 17px);
+    color: rgba(232,201,137,0.7);
+    max-width: 480px;
+    line-height: 1.5;
+    opacity: 0;
+    animation: rise 1s cubic-bezier(0.2,0.8,0.2,1) 0.7s forwards;
+  }
+
+  /* TRANSICIÓN */
+  .transition-band {
+    background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-light) 100%);
+    height: 80px;
+  }
+
+  /* TARJETAS */
+  .tiers-section {
+    background: var(--bg-light);
+    padding: 20px 28px 80px;
+  }
+  .tiers-inner { max-width: 1280px; margin: 0 auto; }
+  .tiers-label {
+    text-align: center;
+    font-size: 9px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 48px;
+  }
+  .tiers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr 1fr;
+    gap: 20px;
+    align-items: stretch;
+    perspective: 1800px;
+  }
+
+  .tier {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--cream);
+    border-radius: 2px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 1s cubic-bezier(0.2,0.8,0.2,1),
+                transform 0.7s cubic-bezier(0.2,0.8,0.2,1),
+                box-shadow 0.6s cubic-bezier(0.2,0.8,0.2,1);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+  .tier.visible { opacity: 1; transform: translateY(0); }
+  .tier:nth-child(1).visible { transition-delay: 0.1s; }
+  .tier:nth-child(2).visible { transition-delay: 0.25s; }
+  .tier:nth-child(3).visible { transition-delay: 0.4s; }
+  .tier:hover {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.06),
+                0 30px 60px -10px rgba(0,0,0,0.25),
+                0 0 0 1px var(--tier-color, rgba(0,0,0,0.1));
+  }
+
+  .tier-media {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: #222;
+  }
+  .tier-media-inner {
+    position: absolute; inset: 0;
+    transition: transform 0.9s cubic-bezier(0.2,0.8,0.2,1);
+    will-change: transform;
+  }
+  .tier:hover .tier-media-inner { transform: scale(1.06); }
+  .tier-media svg { width: 100%; height: 100%; display: block; }
+
+  .tier-overlay-top {
+    position: absolute; top: 0; left: 0; right: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .tier-badge {
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cream);
+    background: rgba(10,8,7,0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 7px 12px;
+    border: 1px solid rgba(232,201,137,0.3);
+    border-radius: 2px;
+  }
+  .tier-roman {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: rgba(244,241,236,0.85);
+    letter-spacing: 0.1em;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+  .tier-overlay-bottom {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 48px 24px 24px;
+    background: linear-gradient(180deg, transparent 0%, rgba(10,8,7,0.7) 50%, rgba(10,8,7,0.95) 100%);
+    z-index: 3;
+    pointer-events: none;
+  }
+  .tier-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: rgba(232,201,137,0.85);
+    margin-bottom: 6px;
+  }
+  .tier-name {
+    font-family: 'Didact Gothic', sans-serif;
+    font-size: 36px;
+    letter-spacing: 0.14em;
+    color: var(--cream);
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .tier-body {
+    padding: 28px 24px 32px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    position: relative;
+  }
+  .tier-body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 0; height: 2px;
+    background: linear-gradient(90deg, transparent 0%, var(--tier-color, var(--gold)) 50%, transparent 100%);
+    transition: width 0.8s cubic-bezier(0.2,0.8,0.2,1);
+  }
+  .tier:hover .tier-body::before { width: 100%; }
+  .tier-level {
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin-bottom: 14px;
+  }
+  .tier-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 22px;
+    min-height: 66px;
+  }
+  .tier-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line-light);
+  }
+  .tier-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .tier-features .check {
+    width: 14px; height: 14px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--tier-color, var(--gold));
+    transition: transform 0.5s cubic-bezier(0.2,0.8,0.2,1);
+  }
+  .tier:hover .tier-features .check { transform: scale(1.2) rotate(-5deg); }
+
+  .tier.bronze { --tier-color: #b07638; }
+  .tier.silver { --tier-color: #6b6863; }
+  .tier.gold   { --tier-color: #c9a84c; }
+
+  /* PLATA elevada */
+  .tier.silver { transform: translateY(60px); }
+  .tier.silver.visible { transform: translateY(-16px); }
+  .tier.silver:hover { transform: translateY(-22px); }
+  .tier.silver {
+    background: #fbfaf6;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05), 0 20px 50px -10px rgba(0,0,0,0.15);
+  }
+  .tier.silver:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08), 0 40px 80px -10px rgba(0,0,0,0.28);
+  }
+  .tier.gold .tier-body {
+    background: linear-gradient(180deg, #faf6ec 0%, var(--cream) 100%);
+  }
+
+  /* CONTACTO */
+  .contact-block {
+    text-align: center;
+    padding: 72px 20px 40px;
+    max-width: 560px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s cubic-bezier(0.2,0.8,0.2,1);
+  }
+  .contact-block.visible { opacity: 1; transform: translateY(0); }
+  .contact-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .contact-ornament-line { width: 40px; height: 1px; background: var(--ink-dim); opacity: 0.4; }
+  .contact-ornament-glyph { color: var(--gold-deep); font-size: 12px; }
+  .contact-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+  }
+  .contact-email {
+    display: inline-block;
+    font-family: 'Didact Gothic', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 16px 30px;
+    border: 1px solid var(--ink);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.2,0.8,0.2,1);
+    z-index: 1;
+  }
+  .contact-email::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--ink);
+    transform: translateY(100%);
+    transition: transform 0.5s cubic-bezier(0.2,0.8,0.2,1);
+    z-index: -1;
+  }
+  .contact-email:hover { color: var(--cream); letter-spacing: 0.35em; }
+  .contact-email:hover::before { transform: translateY(0); }
+  .contact-back {
+    margin-top: 40px;
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    text-decoration: none;
+    transition: color 0.4s ease;
+  }
+  .contact-back:hover { color: var(--ink); }
+  .contact-back::before { content: '← '; }
+  .colophon {
+    text-align: center;
+    padding: 28px 20px;
+    border-top: 1px solid var(--line-light);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 900px) {
+    .tiers-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .tier.silver { transform: translateY(60px); }
+    .tier.silver.visible { transform: translateY(0); }
+    .tier.silver:hover { transform: translateY(-4px); }
+  }
+  @media (max-width: 600px) {
+    .hero { padding: 24px 20px 32px; min-height: 48vh; }
+    .tiers-section { padding: 10px 20px 60px; }
+    .tier-name { font-size: 30px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="particles" id="particles"></div>
+  <div class="hero-inner">
+    <header class="hero-masthead">
+      <span class="masthead-left">Aeterna Studios</span>
+      <span class="masthead-right">Content · Brand · Art</span>
+    </header>
+    <div class="hero-content">
+      <p class="hero-label">— Production Tiers —</p>
+      <h1 class="hero-title">Tres niveles.<br>Tres formas de <em>crear</em>.</h1>
+      <p class="hero-subtitle">Cada marca tiene su propio tono, su propio ritmo, su propia ambición. Elige el que encaja con el tuyo.</p>
+    </div>
+  </div>
+</section>
+
+<div class="transition-band"></div>
+
+<section class="tiers-section">
+  <div class="tiers-inner">
+    <p class="tiers-label">— The Catalogue —</p>
+
+    <div class="tiers-grid">
+
+      <!-- BRONCE -->
+      <article class="tier bronze reveal">
+        <div class="tier-media">
+          <div class="tier-media-inner">
+            <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <linearGradient id="bronzeBg" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#3a2f26"/>
+                  <stop offset="50%" stop-color="#2a2218"/>
+                  <stop offset="100%" stop-color="#1a1410"/>
+                </linearGradient>
+                <linearGradient id="bronzeTable" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#5c4a35"/>
+                  <stop offset="100%" stop-color="#2a2218"/>
+                </linearGradient>
+                <radialGradient id="bronzeLight" cx="50%" cy="35%" r="50%">
+                  <stop offset="0%" stop-color="#d4924a" stop-opacity="0.35"/>
+                  <stop offset="100%" stop-color="#d4924a" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="bronzeBottle" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#7d5230"/>
+                  <stop offset="40%" stop-color="#5a3820"/>
+                  <stop offset="100%" stop-color="#2e1c10"/>
+                </linearGradient>
+              </defs>
+              <rect width="400" height="500" fill="url(#bronzeBg)"/>
+              <rect width="400" height="500" fill="url(#bronzeLight)"/>
+              <rect x="0" y="340" width="400" height="160" fill="url(#bronzeTable)"/>
+              <line x1="0" y1="340" x2="400" y2="340" stroke="#6a5438" stroke-width="0.5" opacity="0.6"/>
+              <ellipse cx="200" cy="355" rx="140" ry="8" fill="#8a6a44" opacity="0.25"/>
+              <g transform="translate(200, 220)">
+                <ellipse cx="0" cy="125" rx="48" ry="7" fill="#000" opacity="0.5"/>
+                <path d="M -38 -80 L -38 100 Q -38 120 -20 122 L 20 122 Q 38 120 38 100 L 38 -80 Q 38 -95 28 -95 L -28 -95 Q -38 -95 -38 -80 Z" fill="url(#bronzeBottle)"/>
+                <rect x="-12" y="-115" width="24" height="22" fill="#3a2515" rx="2"/>
+                <rect x="-14" y="-128" width="28" height="14" fill="#5a3820" rx="1"/>
+                <rect x="-32" y="-70" width="3" height="170" fill="#e8c989" opacity="0.2"/>
+                <rect x="-28" y="-20" width="56" height="70" fill="#f4ead8" opacity="0.92"/>
+                <line x1="-22" y1="-4" x2="22" y2="-4" stroke="#3a2515" stroke-width="0.4"/>
+                <line x1="-22" y1="34" x2="22" y2="34" stroke="#3a2515" stroke-width="0.4"/>
+                <text x="0" y="14" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="10" font-style="italic" fill="#3a2515" opacity="0.7">No I</text>
+                <text x="0" y="26" text-anchor="middle" font-family="Didact Gothic, sans-serif" font-size="6" letter-spacing="2" fill="#3a2515" opacity="0.6">AETERNA</text>
+              </g>
+              <circle cx="80" cy="180" r="32" fill="#3a2f26" opacity="0.8"/>
+              <circle cx="80" cy="180" r="32" fill="none" stroke="#6a5438" stroke-width="0.4" opacity="0.6"/>
+              <circle cx="80" cy="180" r="24" fill="none" stroke="#6a5438" stroke-width="0.3" opacity="0.4"/>
+              <text x="80" y="185" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="13" fill="#b07638" opacity="0.6">I</text>
+              <rect x="310" y="140" width="50" height="70" fill="#3a2f26" opacity="0.7"/>
+              <rect x="310" y="140" width="50" height="70" fill="none" stroke="#6a5438" stroke-width="0.4" opacity="0.5"/>
+              <line x1="320" y1="155" x2="350" y2="155" stroke="#b07638" stroke-width="0.3" opacity="0.5"/>
+              <line x1="320" y1="165" x2="350" y2="165" stroke="#b07638" stroke-width="0.3" opacity="0.5"/>
+              <line x1="320" y1="195" x2="350" y2="195" stroke="#b07638" stroke-width="0.3" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="tier-overlay-top">
+            <span class="tier-badge">Level · 01</span>
+            <span class="tier-roman">I</span>
+          </div>
+          <div class="tier-overlay-bottom">
+            <p class="tier-tagline">Craft without compromise.</p>
+            <h3 class="tier-name">Bronce</h3>
+          </div>
+        </div>
+        <div class="tier-body">
+          <p class="tier-level">— El esencial —</p>
+          <p class="tier-desc">Contenido de producto limpio y profesional. Ideal para publicación frecuente en redes.</p>
+          <ul class="tier-features">
+            <li><svg class="check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8.5l3.5 3.5L13 5"/></svg><span>Escenas simples y bien ejecutadas</span></li>
+            <li><svg class="check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8.5l3.5 3.5L13 5"/></svg><span>Producto protagonista, entornos neutros</span></li>
+            <li><svg class="check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8.5l3.5 3.5L13 5"/></svg><span>Calidad profesional lista para publicar</span></li>
+            <li><svg class="check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8.5l3.5 3.5L13 5"/></svg><span>Ritmo de entrega ágil</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- PLATA -->
+      <article class="tier silver reveal">
+        <div class="tier-media">
+          <div class="tier-media-inner">
+            <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <linearGradient id="silverRoom" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#6a5f52"/>
+                  <stop offset="100%" stop-color="#2a241e"/>
+                </linearGradient>
+                <radialGradient id="silverLight" cx="35%" cy="30%" r="60%">
+                  <stop offset="0%" stop-color="#f4ead8" stop-opacity="0.5"/>
+                  <stop offset="60%" stop-color="#d4c9a8" stop-opacity="0.15"/>
+                  <stop offset="100%" stop-color="#d4c9a8" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="silverWindow" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#e8dfc8"/>
+                  <stop offset="100%" stop-color="#b8a888"/>
+                </linearGradient>
+              </defs>
+              <rect width="400" height="500" fill="url(#silverRoom)"/>
+              <rect x="30" y="80" width="110" height="220" fill="url(#silverWindow)" opacity="0.85"/>
+              <rect x="30" y="80" width="110" height="220" fill="none" stroke="#8a7f6a" stroke-width="0.8"/>
+              <line x1="85" y1="80" x2="85" y2="300" stroke="#8a7f6a" stroke-width="0.6"/>
+              <line x1="30" y1="190" x2="140" y2="190" stroke="#8a7f6a" stroke-width="0.6"/>
+              <polygon points="140,90 140,290 340,340 340,120" fill="#f4ead8" opacity="0.08"/>
+              <polygon points="140,100 140,280 320,310 320,130" fill="#f4ead8" opacity="0.06"/>
+              <rect x="0" y="370" width="400" height="130" fill="#2a241e"/>
+              <ellipse cx="200" cy="380" rx="180" ry="6" fill="#8a7f6a" opacity="0.2"/>
+              <rect width="400" height="500" fill="url(#silverLight)"/>
+              <g transform="translate(240, 180)">
+                <ellipse cx="0" cy="200" rx="42" ry="6" fill="#000" opacity="0.5"/>
+                <circle cx="0" cy="0" r="22" fill="#3a2f26"/>
+                <circle cx="0" cy="0" r="22" fill="url(#silverLight)" opacity="0.6"/>
+                <rect x="-7" y="18" width="14" height="12" fill="#2a221a"/>
+                <path d="M -35 30 L -40 190 L -30 200 L 30 200 L 40 190 L 35 30 Q 30 25 18 24 L -18 24 Q -30 25 -35 30 Z" fill="#4a4038"/>
+                <path d="M -12 30 L -16 120 L -2 150 L 0 35 Z" fill="#2a2218" opacity="0.7"/>
+                <path d="M 12 30 L 16 120 L 2 150 L 0 35 Z" fill="#2a2218" opacity="0.5"/>
+                <path d="M -40 40 L -35 180 L -32 180 L -37 40 Z" fill="#c4b89a" opacity="0.45"/>
+                <ellipse cx="-28" cy="35" rx="8" ry="5" fill="#5a5048" opacity="0.7"/>
+                <ellipse cx="28" cy="35" rx="8" ry="5" fill="#5a5048" opacity="0.7"/>
+              </g>
+              <line x1="160" y1="0" x2="160" y2="370" stroke="#3a2f26" stroke-width="1" opacity="0.5"/>
+              <g transform="translate(90, 350)">
+                <ellipse cx="0" cy="20" rx="12" ry="3" fill="#000" opacity="0.4"/>
+                <path d="M -10 -20 Q -12 0 -8 18 L 8 18 Q 12 0 10 -20 Q 8 -22 0 -22 Q -8 -22 -10 -20 Z" fill="#5a5048"/>
+                <path d="M -10 -20 Q -12 0 -8 18 L 8 18 Q 12 0 10 -20 Q 8 -22 0 -22 Q -8 -22 -10 -20 Z" fill="url(#silverLight)" opacity="0.5"/>
+                <line x1="0" y1="-22" x2="-2" y2="-45" stroke="#2a241e" stroke-width="0.8"/>
+                <line x1="0" y1="-22" x2="4" y2="-40" stroke="#2a241e" stroke-width="0.8"/>
+                <ellipse cx="-3" cy="-45" rx="2" ry="4" fill="#3a332a"/>
+                <ellipse cx="4" cy="-40" rx="2" ry="3.5" fill="#3a332a"/>
+              </g>
+              <circle cx="220" cy="170" r="1" fill="#f4ead8" opacity="0.6"/>
+              <circle cx="195" cy="210" r="0.8" fill="#f4ead8" opacity="0.5"/>
+              <circle cx="280" cy="150" r="1.2" fill="#f4ead8" opacity="0.7"/>
+              <circle cx="255" cy="240" r="0.8" fill="#f4ead8" opacity="0.5"/>
+              <circle cx="310" cy="200" r="1" fill="#f4ead8" opacity="0.6"/>
+              <circle cx="180" cy="180" r="0.6" fill="#f4ead8" opacity="0.4"/>
+              <circle cx="230" cy="260" r="0.8" fill="#f4ead8" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="tier-overlay-top">
+            <span class="tier-badge" style="background: rgba(201,168,76,0.9); color: #1a1a1a; border-color: rgba(232,201,137,0.9);">★ Most Selected</span>
+            <span class="tier-roman">II</span>
+          </div>
+          <div class="tier-overlay-bottom">
+            <p class="tier-tagline">Atmosphere meets identity.</p>
+            <h3 class="tier-name">Plata</h3>
+          </div>
+        </div>
+        <div class="tier-body">
+          <p class="tier-level">— El elegido —</p>
+          <p class="tier-desc">Producción con atmósfera y carácter visual. Escenas elaboradas con tu identidad de marca.</p>
+          <ul class="tier-features">
+            <li><svg class="check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8.5l3.5 3.5L13 5"/></svg><span>Iluminación y ambientación trabajadas</span></li>
+            <li><svg class="check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8.5l3.5 3.5L13 5"/></svg><span>Entornos aspiracionales y lifestyle</span></li>
+            <li><svg class="check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8.5l3.5 3.5L13 5"/></svg><span>Profundidad visual y narrativa</span></li>
+            <li><svg class="check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8.5l3.5 3.5L13 5"/></svg><span>Adaptado a la identidad de tu marca</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- ORO -->
+      <article class="tier gold reveal">
+        <div class="tier-media">
+          <div class="tier-media-inner">
+            <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <linearGradient id="goldBg" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#2a1a0a"/>
+                  <stop offset="35%" stop-color="#6a3e15"/>
+                  <stop offset="65%" stop-color="#c9822a"/>
+                  <stop offset="100%" stop-color="#1a0e08"/>
+                </linearGradient>
+                <radialGradient id="goldSun" cx="50%" cy="42%" r="35%">
+                  <stop offset="0%" stop-color="#fff3d4"/>
+                  <stop offset="30%" stop-color="#f0d487"/>
+                  <stop offset="60%" stop-color="#c9a84c" stop-opacity="0.6"/>
+                  <stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="goldTemple" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#3a2518"/>
+                  <stop offset="100%" stop-color="#12080a"/>
+                </linearGradient>
+                <filter id="goldGlow">
+                  <feGaussianBlur stdDeviation="4"/>
+                </filter>
+              </defs>
+              <rect width="400" height="500" fill="url(#goldBg)"/>
+              <circle cx="200" cy="210" r="120" fill="url(#goldSun)" filter="url(#goldGlow)"/>
+              <circle cx="200" cy="210" r="45" fill="#fff3d4"/>
+              <circle cx="200" cy="210" r="35" fill="#fffae0"/>
+              <g opacity="0.25">
+                <line x1="200" y1="210" x2="200" y2="40" stroke="#f0d487" stroke-width="1"/>
+                <line x1="200" y1="210" x2="60" y2="120" stroke="#f0d487" stroke-width="1"/>
+                <line x1="200" y1="210" x2="340" y2="120" stroke="#f0d487" stroke-width="1"/>
+                <line x1="200" y1="210" x2="40" y2="210" stroke="#f0d487" stroke-width="1"/>
+                <line x1="200" y1="210" x2="360" y2="210" stroke="#f0d487" stroke-width="1"/>
+                <line x1="200" y1="210" x2="80" y2="300" stroke="#f0d487" stroke-width="1"/>
+                <line x1="200" y1="210" x2="320" y2="300" stroke="#f0d487" stroke-width="1"/>
+              </g>
+              <ellipse cx="90" cy="160" rx="60" ry="12" fill="#c9822a" opacity="0.4"/>
+              <ellipse cx="310" cy="140" rx="55" ry="10" fill="#c9822a" opacity="0.3"/>
+              <ellipse cx="60" cy="220" rx="40" ry="8" fill="#8a5222" opacity="0.5"/>
+              <ellipse cx="350" cy="200" rx="35" ry="7" fill="#8a5222" opacity="0.45"/>
+              <polygon points="0,340 40,310 80,325 140,295 200,310 260,290 320,305 400,320 400,360 0,360" fill="#2a1a0a" opacity="0.6"/>
+              <rect x="0" y="360" width="400" height="140" fill="#1a0e08"/>
+              <polygon points="200,180 100,360 300,360" fill="url(#goldTemple)"/>
+              <g stroke="#3a2518" stroke-width="0.4" opacity="0.7">
+                <line x1="150" y1="270" x2="250" y2="270"/>
+                <line x1="130" y1="300" x2="270" y2="300"/>
+                <line x1="115" y1="330" x2="285" y2="330"/>
+              </g>
+              <rect x="190" y="320" width="20" height="40" fill="#000" opacity="0.9"/>
+              <polygon points="190,320 200,310 210,320" fill="#000" opacity="0.9"/>
+              <polygon points="330,240 290,360 370,360" fill="#2a1a0a" opacity="0.75"/>
+              <polygon points="70,260 30,360 110,360" fill="#2a1a0a" opacity="0.7"/>
+              <g transform="translate(50, 330)">
+                <rect x="-4" y="0" width="8" height="30" fill="#2a1a0a"/>
+                <rect x="-6" y="-4" width="12" height="6" fill="#2a1a0a"/>
+                <rect x="-5" y="30" width="10" height="4" fill="#2a1a0a"/>
+              </g>
+              <g transform="translate(350, 330)">
+                <rect x="-4" y="0" width="8" height="30" fill="#2a1a0a"/>
+                <rect x="-6" y="-4" width="12" height="6" fill="#2a1a0a"/>
+                <rect x="-5" y="30" width="10" height="4" fill="#2a1a0a"/>
+              </g>
+              <g transform="translate(200, 390)">
+                <ellipse cx="0" cy="12" rx="6" ry="1.5" fill="#000" opacity="0.6"/>
+                <circle cx="0" cy="-10" r="2.5" fill="#0a0604"/>
+                <path d="M -4 -8 L -5 8 L 5 8 L 4 -8 Z" fill="#0a0604"/>
+                <rect x="-4.5" y="4" width="2" height="8" fill="#0a0604"/>
+                <rect x="2.5" y="4" width="2" height="8" fill="#0a0604"/>
+              </g>
+              <ellipse cx="200" cy="402" rx="160" ry="3" fill="#c9a84c" opacity="0.15"/>
+              <circle cx="80" cy="200" r="1.5" fill="#f0d487" opacity="0.8"/>
+              <circle cx="150" cy="150" r="1" fill="#f0d487" opacity="0.7"/>
+              <circle cx="250" cy="130" r="1.2" fill="#f0d487" opacity="0.75"/>
+              <circle cx="320" cy="180" r="1" fill="#f0d487" opacity="0.7"/>
+              <circle cx="100" cy="260" r="0.8" fill="#f0d487" opacity="0.6"/>
+              <circle cx="300" cy="240" r="0.8" fill="#f0d487" opacity="0.6"/>
+              <circle cx="180" cy="110" r="0.7" fill="#f0d487" opacity="0.55"/>
+              <circle cx="220" cy="90" r="1" fill="#f0d487" opacity="0.7"/>
+              <circle cx="60" cy="140" r="0.8" fill="#f0d487" opacity="0.6"/>
+              <circle cx="340" cy="100" r="0.9" fill="#f0d487" opacity="0.65"/>
+            </svg>
+          </div>
+          <div class="tier-overlay-top">
+            <span class="tier-badge">Level · 03</span>
+            <span class="tier-roman">III</span>
+          </div>
+          <div class="tier-overlay-bottom">
+            <p class="tier-tagline">No visual limits.</p>
+            <h3 class="tier-name">Oro</h3>
+          </div>
+        </div>
+        <div class="tier-body">
+          <p class="tier-level">— El silencioso —</p>
+          <p class="tier-desc">Máximo nivel de producción cinematográfica. Piezas de impacto para lanzamientos y campañas.</p>
+          <ul class="tier-features">
+            <li><svg class="check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8.5l3.5 3.5L13 5"/></svg><span>Escenas cinematográficas imposibles</span></li>
+            <li><svg class="check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8.5l3.5 3.5L13 5"/></svg><span>Producción nivel campaña publicitaria</span></li>
+            <li><svg class="check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8.5l3.5 3.5L13 5"/></svg><span>Concepto completo y dirección de arte</span></li>
+            <li><svg class="check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8.5l3.5 3.5L13 5"/></svg><span>Máximo impacto visual y narrativo</span></li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="contact-block reveal">
+      <div class="contact-ornament">
+        <div class="contact-ornament-line"></div>
+        <span class="contact-ornament-glyph">✦</span>
+        <div class="contact-ornament-line"></div>
+      </div>
+      <p class="contact-text">El precio de cada pieza depende del minutaje y la complejidad del proyecto. Contáctame para recibir una propuesta personalizada para tu marca.</p>
+      <a href="mailto:aeternastudios00@gmail.com?subject=Propuesta%20de%20producci%C3%B3n%20Aeterna%20Studios" class="contact-email">Request a proposal</a>
+      <br>
+      <a href="index.html" class="contact-back">Back to Aeterna</a>
+    </div>
+
+  </div>
+</section>
+
+<footer class="colophon">© Aeterna Studios · 26 · All rights reserved</footer>
+
+<script>
+  const particlesContainer = document.getElementById('particles');
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDelay = Math.random() * 14 + 's';
+    p.style.animationDuration = (10 + Math.random() * 8) + 's';
+    p.style.opacity = 0.3 + Math.random() * 0.4;
+    particlesContainer.appendChild(p);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const tiers = document.querySelectorAll('.tier');
+  tiers.forEach(tier => {
+    const isFeatured = tier.classList.contains('silver');
+    const baseY = isFeatured ? -16 : 0;
+    tier.addEventListener('mousemove', (e) => {
+      const rect = tier.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const rotateX = ((y - rect.height/2) / (rect.height/2)) * -5;
+      const rotateY = ((x - rect.width/2) / (rect.width/2)) * 5;
+      const hoverY = isFeatured ? -22 : -6;
+      tier.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(${hoverY}px)`;
+    });
+    tier.addEventListener('mouseleave', () => {
+      tier.style.transform = `translateY(${baseY}px)`;
+    });
+  });
+
+  let rafId = null;
+  function updateParallax() {
+    tiers.forEach(tier => {
+      const rect = tier.getBoundingClientRect();
+      const viewportH = window.innerHeight;
+      if (rect.top < viewportH && rect.bottom > 0) {
+        const progress = (viewportH - rect.top) / (viewportH + rect.height);
+        const translateY = (progress - 0.5) * -30;
+        const media = tier.querySelector('.tier-media-inner');
+        if (media && !tier.matches(':hover')) {
+          media.style.transform = `translateY(${translateY}px)`;
+        }
+      }
+    });
+    rafId = null;
+  }
+  window.addEventListener('scroll', () => {
+    if (rafId === null) rafId = requestAnimationFrame(updateParallax);
+  }, { passive: true });
+</script>
+
+</body>
+</html>
